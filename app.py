@@ -1,10 +1,15 @@
 import os
+import boto3
 from flask import Flask, flash, url_for, render_template, request
 from werkzeug.utils import secure_filename, redirect
 
-Upload_folder = "C:\\Users\\Shlok\\Desktop"
+Upload_folder = ""
 allowed_extensions = {'pdf', 'jpeg', 'jpg'}
-
+def upload_to_aws(Key,tok):
+    bucketName='kharkanas'
+    outPutname=tok+"/"+Key
+    s3=boto3.client('s3')
+    s3.upload_file(Key,bucketName,outPutname)
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = Upload_folder
 app.config['SECRET_KEY'] = 'any secret string'
@@ -20,7 +25,7 @@ def file_uploader():  # uploads doc when clicked Submit button
     if request.method == 'POST':
         f = request.files["file"]
         if allowed_file(f.filename):
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
+            upload_to_aws(f.filename,'34')
             flash("File Uploaded!")
             return render_template("notes_uploader.html", title='Notes', status='admin', login=True)
 
