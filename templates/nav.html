@@ -1,0 +1,9 @@
+{% if login==False %}
+    {% include "nav_blank.html" %}
+{% else %}
+    {% if status=='admin' %}
+        {% include "nav_admin.html" %}
+    {% elif status=='student' %}
+        {% include "nav_student.html" %}
+    {% endif %}
+{% endif %}

@@ -1,2 +1,2 @@
 # comet
-This is Comet.
+This is comet.

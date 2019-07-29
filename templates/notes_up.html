@@ -1,0 +1,8 @@
+{% extends "bodylayout.html" %}
+
+{% block content %}
+        <form action="/admin/home/notes" method=POST enctype=multipart/form-data>
+            <input type="file" name="file" accept="application/pdf, image/jpeg, image/jpg" multiple>
+            <button class="btn btn-primary" type="submit" name="submit_n_upload" values="docs">Submit</button>
+        </form>
+{% endblock content %}
